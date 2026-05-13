@@ -1,0 +1,40 @@
+---
+title: "Cambios en el bacterioma de la rizosfera asociados a bacterias fijadoras de nitrógeno en *Phaseolus vulgaris*"
+author: ""
+date: "`r Sys.Date()`"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+bibliography: references.bib
+csl: apa.csl
+lang: es
+---
+
+## Objetivo
+
+Comparar el bacterioma de la rizosfera asociados a bacterias fijadoras de nitrógeno en *Phaseolus vulgaris*.
+
+## Metodología
+
+### Obtención de datos
+
+Los datos para el análisis se obtuvieron de NCBI BioProject: PRJNA552113 (México), PRJNA1292277 y PRJNA1292281 (Estados Unidos).
+
+### Procesamiento de variantes de secuencia de amplicón (ASV)
+
+El procesamiento del filtrado de calidad de los ASV (Q ≥ 33), procesamiento de lecturas *paired-end*, eliminación de las secuencias de *primers* y quimeras ocasionadas por el PCR utilizará **DADA2** [@sahil2025]. Las lecturas tendrán una filtración de 260 pb en dirección *forward* y 240 pb en dirección *reverse*, utilizando los parámetros `maxN=0`, `maxEE=c(2,2)`, `truncQ=2` y `rm.phix=TRUE` [@mataranyika2024]. Los ASV conservados serán ≥ 270 pb [@sahil2025]. La asignación taxonómica se realizará mediante alineamiento contra la base de datos **SILVA v131.1**, los niveles taxonómicos van desde el filo hasta el género conservando ≥ 99% de identidad [@overgaard2022]. La rarefacción se realizó para estandarizar la comparabilidad para los cálculos de diversidad [@mataranyika2024].
+
+### Análisis estadístico
+
+Los análisis de diversidad alfa y beta se realizarán en R utilizando el paquete `phyloseq`. Las diferencias entre grupos en la diversidad alfa utilizará las pruebas de Kruskal–Wallis o de rangos de Wilcoxon, mientras que los valores de *p* serán ajustados por comparaciones múltiples mediante el método **Benjamini–Hochberg FDR** [@yurgel2026]. Asimismo, las diferencias entre grupos se analizarán mediante **PERMANOVA** (función `adonis`) con un máximo de 999 permutaciones [@sahil2025]. Se elaborará un mapa de calor (*heatmap*) a partir de los coeficientes de correlación calculados utilizando el paquete `pheatmap`, empleando la correlación de Spearman, con el propósito de estimar la relación del bacterioma respecto a la muestra. La gráfica de la composición taxonómica se realizará con el paquete `ggplot2` [@ghotbi2025].
+
+## Referencias
+
+::: {#refs}
+:::
